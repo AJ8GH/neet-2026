@@ -1,5 +1,6 @@
 plugins {
   alias(libs.plugins.kotlin.jvm)
+  alias(libs.plugins.kotest)
   alias(libs.plugins.kover)
 }
 
@@ -18,7 +19,6 @@ repositories {
 dependencies {
   implementation(libs.bundles.implementation)
   testImplementation(libs.bundles.test.implementation)
-  testRuntimeOnly(libs.bundles.test.runtimeOnly)
 }
 
 kotlin {
