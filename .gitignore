@@ -1,0 +1,10 @@
+!gradle-wrapper.jar
+out
+build
+target
+.DS_Store
+**/*.iml
+.idea
+.vscode
+.kotlin
+.gradle

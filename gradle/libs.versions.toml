@@ -1,0 +1,36 @@
+[versions]
+java = "25"
+kotlin = "2.3.20"
+junit-jupiter = "5.12.1"
+kover = '0.9.1'
+kotest = '5.9.1'
+kotlin-logging = '7.0.7'
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = 'kover' }
+
+[libraries]
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junit-jupiter" }
+junit-platform = { group = "org.junit.platform", name = "junit-platform-launcher" }
+kotest-assertions-core = { group = 'io.kotest', name = 'kotest-assertions-core', version.ref = 'kotest' }
+kotest-framework-datatest = { group = 'io.kotest', name = 'kotest-framework-datatest', version.ref = 'kotest' }
+kotest-runner-junit5 = { group = 'io.kotest', name = 'kotest-runner-junit5', version.ref = 'kotest' }
+kotlin-logging-jvm = { group = 'io.github.oshai', name = 'kotlin-logging-jvm', version.ref = 'kotlin-logging' }
+
+[bundles]
+implementation = [
+  "kotlin-logging-jvm",
+]
+
+test-implementation = [
+  "junit-jupiter",
+  "kotest-assertions-core",
+  "kotest-framework-datatest",
+  "kotest-runner-junit5",
+  "kotlin-logging-jvm",
+]
+
+test-runtimeOnly = [
+  "junit-platform",
+]
