@@ -21,12 +21,27 @@ dependencies {
   testRuntimeOnly(libs.bundles.test.runtimeOnly)
 }
 
-java {
-  toolchain {
-    languageVersion = JavaLanguageVersion.of(libs.versions.java.get())
-  }
+kotlin {
+  jvmToolchain(libs.versions.java.get().toInt())
 }
 
-tasks.named<Test>("test") {
+tasks.withType<Test> {
   useJUnitPlatform()
+  finalizedBy(
+    tasks.koverHtmlReport,
+    tasks.koverXmlReport,
+  )
 }
+
+// kover {
+//   reports {
+//     filters {
+//       excludes {
+//         classes(
+//           "$group.",
+//           "$group."
+//         )
+//       }
+//     }
+//   }
+// }
