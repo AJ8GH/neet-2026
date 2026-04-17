@@ -1,5 +1,6 @@
 package io.github.aj8gh.neet26.problems.arraysandhashing.containsduplicate
 
+import io.github.aj8gh.neet26.problems.arraysandhashing.hasDuplicate
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -21,6 +22,6 @@ class ContainsDuplicateTest {
   @ParameterizedTest
   @MethodSource("params")
   fun containsDuplicate(input: IntArray, expected: Boolean) {
-    containsDuplicate(input) shouldBe expected
+    hasDuplicate(input) shouldBe expected
   }
 }
