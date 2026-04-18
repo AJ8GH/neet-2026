@@ -2,7 +2,8 @@ package io.github.aj8gh.neet26.problems.arraysandhashing
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withTests
-import io.kotest.matchers.shouldBe
+import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
+import io.kotest.matchers.collections.shouldHaveSize
 
 class GroupAnagramsSpec : FunSpec({
   withTests(
@@ -15,6 +16,13 @@ class GroupAnagramsSpec : FunSpec({
       listOf(listOf("x"))
     )
   ) { (input, expected) ->
-    groupAnagrams(input) shouldBe expected
+    groupAnagrams(input).let {
+      it shouldHaveSize expected.size
+      val actualSorted = it.sortedBy { sl -> sl.size }
+      val expectedSorted = expected.sortedBy { sl -> sl.size }
+      for (i in actualSorted.indices) {
+        actualSorted[i] shouldContainExactlyInAnyOrder expectedSorted[i]
+      }
+    }
   }
 })
