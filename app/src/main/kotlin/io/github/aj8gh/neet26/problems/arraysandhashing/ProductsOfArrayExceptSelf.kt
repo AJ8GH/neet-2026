@@ -1,20 +1,13 @@
 package io.github.aj8gh.neet26.problems.arraysandhashing
 
 fun productExceptSelf(nums: IntArray): IntArray {
-  val product = nums.fold(1) { acc, num -> acc * num }
-  val products = IntArray(nums.size)
-  for (i in nums.indices) {
-    var newProduct = 1
-    if (nums[i] == 0) {
-      for (j in nums.indices) {
-        if (j != i) {
-          newProduct *= nums[j]
-        }
-      }
-    } else {
-      newProduct = product / nums[i]
-    }
-    products[i] = newProduct
+  val products = IntArray(nums.size) { 1 }
+  for (i in 1..nums.lastIndex) products[i] = products[i - 1] * nums[i - 1]
+  var product = 1
+  for (i in (nums.lastIndex - 1) downTo 0) {
+    product *= nums[i + 1]
+    products[i] *= product
   }
+
   return products
 }

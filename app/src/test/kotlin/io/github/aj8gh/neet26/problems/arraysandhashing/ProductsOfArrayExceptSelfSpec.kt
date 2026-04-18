@@ -8,6 +8,7 @@ class ProductsOfArrayExceptSelfSpec : FunSpec({
   withTests(
     Pair(intArrayOf(1, 2, 4, 6), intArrayOf(48, 24, 12, 8)),
     Pair(intArrayOf(-1, 0, 1, 2, 3), intArrayOf(0, -6, 0, 0, 0)),
+    Pair(intArrayOf(6, 2, 3, 4), intArrayOf(24, 72, 48, 36)),
   ) { (input, expected) ->
     productExceptSelf(input) shouldBe expected
   }
