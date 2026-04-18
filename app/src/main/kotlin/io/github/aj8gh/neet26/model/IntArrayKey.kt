@@ -9,4 +9,6 @@ data class IntArrayKey(
 
   override fun equals(other: Any?) = this === other
       || (other is IntArrayKey && value.contentEquals(other.value))
+
+  override fun toString() = "[${value.joinToString(", ")}]"
 }
