@@ -34,6 +34,20 @@ class ValidSudokuSpec : FunSpec({
       ),
       false
     ),
+    Pair(
+      arrayOf(
+        charArrayOf('7', '.', '.', '.', '4', '.', '.', '.', '.'),
+        charArrayOf('.', '.', '.', '8', '6', '5', '.', '.', '.'),
+        charArrayOf('.', '1', '.', '2', '.', '.', '.', '.', '.'),
+        charArrayOf('.', '.', '.', '.', '.', '9', '.', '.', '.'),
+        charArrayOf('.', '.', '.', '.', '5', '.', '5', '.', '.'),
+        charArrayOf('.', '.', '.', '.', '.', '.', '.', '.', '.'),
+        charArrayOf('.', '.', '.', '.', '.', '.', '2', '.', '.'),
+        charArrayOf('.', '.', '.', '.', '.', '.', '.', '.', '.'),
+        charArrayOf('.', '.', '.', '.', '.', '.', '.', '.', '.')
+      ),
+      false
+    ),
   ) { (input, expected) ->
     isValidSudoku(input) shouldBe expected
   }
