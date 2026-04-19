@@ -8,6 +8,9 @@ class ValidPalindromeSpec : FunSpec({
   withTests(
     Pair("Was it a car or a cat I saw?", true),
     Pair("tab a cat", false),
+    Pair("0P", false),
+    Pair("No lemon, no melon", true),
+    Pair("Race car", true),
   ) { (input, expected) ->
     isPalindrome(input) shouldBe expected
   }
