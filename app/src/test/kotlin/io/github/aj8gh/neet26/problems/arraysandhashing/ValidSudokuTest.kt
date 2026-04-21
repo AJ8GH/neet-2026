@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withTests
 import io.kotest.matchers.shouldBe
 
-class ValidSudokuSpec : FunSpec({
+class ValidSudokuTest : FunSpec({
   withTests(
     Pair(
       arrayOf(

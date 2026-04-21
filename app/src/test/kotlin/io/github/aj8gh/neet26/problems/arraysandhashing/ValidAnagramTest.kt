@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withTests
 import io.kotest.matchers.shouldBe
 
-class ValidAnagramSpec : FunSpec({
+class ValidAnagramTest : FunSpec({
   withTests(
     Triple("racecar", "carrace", true),
     Triple("jar", "jam", false),

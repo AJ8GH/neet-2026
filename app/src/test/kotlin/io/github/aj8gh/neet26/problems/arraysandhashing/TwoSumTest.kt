@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withTests
 import io.kotest.matchers.shouldBe
 
-class TwoSumSpec : FunSpec({
+class TwoSumTest : FunSpec({
   withTests(
     Triple(intArrayOf(3, 4, 5, 6), 7, intArrayOf(0, 1)),
     Triple(intArrayOf(4, 5, 6), 10, intArrayOf(0, 2)),

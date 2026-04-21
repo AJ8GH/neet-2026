@@ -11,9 +11,9 @@ group = projectGroup
 version = projectVersion
 
 repositories {
-  mavenLocal()
+  // mavenLocal()
   mavenCentral()
-  gradlePluginPortal()
+  // gradlePluginPortal()
 }
 
 dependencies {

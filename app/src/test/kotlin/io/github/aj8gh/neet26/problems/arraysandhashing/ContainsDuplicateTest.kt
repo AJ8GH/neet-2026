@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withTests
 import io.kotest.matchers.shouldBe
 
-class ContainsDuplicateSpec : FunSpec({
+class ContainsDuplicateTest : FunSpec({
   withTests(
     Pair(intArrayOf(1, 2, 3, 3), true),
     Pair(intArrayOf(1, 2, 3, 4), false),

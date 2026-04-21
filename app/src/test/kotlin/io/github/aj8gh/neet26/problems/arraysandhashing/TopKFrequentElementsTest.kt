@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withTests
 import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
 
-class TopKFrequentElementsSpec : FunSpec({
+class TopKFrequentElementsTest : FunSpec({
   withTests(
     Triple(intArrayOf(1, 2, 2, 3, 3, 3), 2, intArrayOf(2, 3)),
     Triple(intArrayOf(7, 7), 1, intArrayOf(7)),
