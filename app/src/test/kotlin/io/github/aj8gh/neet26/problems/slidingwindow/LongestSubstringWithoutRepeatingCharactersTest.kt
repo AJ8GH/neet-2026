@@ -11,6 +11,7 @@ class LongestSubstringWithoutRepeatingCharactersTest : FunSpec({
     Pair("xxxx", 1),
     Pair("abzxyzcg", 5),
     Pair("thequickbrownfoxjumpsoverthelazydogthequickbrownfoxjumpsovert", 17),
+    Pair("abbba", 2),
   ) { (input, expected) ->
     lengthOfLongestSubstring(input) shouldBe expected
   }
