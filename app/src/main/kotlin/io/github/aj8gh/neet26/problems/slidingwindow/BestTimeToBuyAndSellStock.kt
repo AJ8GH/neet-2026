@@ -1,5 +1,15 @@
 package io.github.aj8gh.neet26.problems.slidingwindow
 
+import kotlin.Int.Companion.MAX_VALUE
+import kotlin.Int.Companion.MIN_VALUE
+
 fun maxProfit(prices: IntArray): Int {
-  return 0
+  var maxProfit = MIN_VALUE
+  var bestBuy = MAX_VALUE
+  for (i in 0 until prices.lastIndex) {
+    bestBuy = minOf(prices[i], bestBuy)
+    val profit = prices[i + 1] - bestBuy
+    maxProfit = maxOf(maxProfit, profit)
+  }
+  return maxOf(maxProfit, 0)
 }
