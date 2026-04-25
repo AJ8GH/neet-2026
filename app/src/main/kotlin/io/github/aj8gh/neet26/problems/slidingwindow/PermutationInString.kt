@@ -1,16 +1,17 @@
 package io.github.aj8gh.neet26.problems.slidingwindow
 
 fun checkInclusion(s1: String, s2: String): Boolean {
-  val count = s1.groupingBy { it }.eachCount().toMutableMap()
+  val count = IntArray(26)
+  for (c in s1) {
+    count[c - 'a']++
+  }
   for ((i, c) in s2.withIndex()) {
-    count[c]?.let { count[c] = it - 1 }
+    count[c - 'a']--
     if (i > s1.lastIndex) {
-      val start = s2[i - s1.length]
-      count[start]?.let {
-        count[start] = it + 1
-      }
+      val j = s2[i - s1.length] - 'a'
+      if (count[j] <= 0) count[j]++
     }
-    if (count.all { it.value == 0 }) return true
+    if (count.all { it <= 0 }) return true
   }
   return false
 }
