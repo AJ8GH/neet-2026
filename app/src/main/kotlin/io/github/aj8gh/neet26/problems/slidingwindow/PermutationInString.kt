@@ -1,17 +1,23 @@
 package io.github.aj8gh.neet26.problems.slidingwindow
 
 fun checkInclusion(s1: String, s2: String): Boolean {
-  val count = IntArray(26)
+  val s1Count = IntArray(26)
+  val s2Count = IntArray(26)
+  var expectedMatches = 0
+  var actualMatches = 0
+
   for (c in s1) {
-    count[c - 'a']++
+    if (s1Count[c - 'a']++ == 0) expectedMatches++
   }
   for ((i, c) in s2.withIndex()) {
-    count[c - 'a']--
+    s2Count[c - 'a']++
     if (i > s1.lastIndex) {
       val j = s2[i - s1.length] - 'a'
-      if (count[j] <= 0) count[j]++
+      s2Count[j]--
+      if (s2Count[j] == s1Count[j] - 1) actualMatches--
     }
-    if (count.all { it <= 0 }) return true
+    if (s1Count[c - 'a'] == s2Count[c - 'a']) actualMatches++
+    if (actualMatches == expectedMatches) return true
   }
   return false
 }

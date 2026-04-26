@@ -7,6 +7,10 @@ import io.kotest.matchers.shouldBe
 class PermutationInStringTest : FunSpec({
   withTests(
     Triple("abc", "ccccbbbbaaaa", false),
+    Triple("abc", "aaab", false),
+    Triple("ab", "aa", false),
+    Triple("ab", "aab", true),
+    Triple("ab", "eidboaoo", false),
     Triple("abc", "lecabee", true),
     Triple("abc", "lecaabee", false),
   ) { (s1, s2, expected) ->
