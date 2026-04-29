@@ -6,6 +6,7 @@ import io.kotest.matchers.shouldBe
 
 class ValidParenthesesTest : FunSpec({
   withTests(
+    Pair("]", false),
     Pair("[]", true),
     Pair("([{}])", true),
     Pair("[(])", false),
