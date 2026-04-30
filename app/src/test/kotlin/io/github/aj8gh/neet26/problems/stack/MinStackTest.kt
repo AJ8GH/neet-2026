@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
 class MinStackTest : FunSpec({
-  test("minStack") {
+  test("case 1") {
     val minStack = MinStack()
     minStack.push(1)
     minStack.push(2)
@@ -12,6 +12,29 @@ class MinStackTest : FunSpec({
     minStack.getMin() shouldBe 0
     minStack.pop()
     minStack.top() shouldBe 2
+    minStack.getMin() shouldBe 1
+  }
+
+  test("case 2") {
+    val minStack = MinStack()
+    minStack.push(1)
+    minStack.push(2)
+    minStack.push(-2)
+    minStack.push(-1)
+    minStack.push(-2)
+    minStack.push(3)
+    minStack.pop()
+    minStack.top() shouldBe -2
+    minStack.getMin() shouldBe -2
+    minStack.pop()
+    minStack.getMin() shouldBe -2
+    minStack.pop()
+    minStack.top() shouldBe -2
+    minStack.getMin() shouldBe -2
+    minStack.pop()
+    minStack.top() shouldBe 2
+    minStack.getMin() shouldBe 1
+    minStack.pop()
     minStack.getMin() shouldBe 1
   }
 })
