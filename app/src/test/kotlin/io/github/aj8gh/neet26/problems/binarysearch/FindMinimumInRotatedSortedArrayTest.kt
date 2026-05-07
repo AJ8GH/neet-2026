@@ -6,6 +6,8 @@ import io.kotest.matchers.shouldBe
 
 class FindMinimumInRotatedSortedArrayTest : FunSpec({
   withTests(
+    Pair(intArrayOf(2, 1), 1),
+    Pair(intArrayOf(1), 1),
     Pair(intArrayOf(3, 4, 5, 6, 1, 2), 1),
     Pair(intArrayOf(4, 5, 0, 1, 2, 3), 0),
     Pair(intArrayOf(4, 5, 6, 7), 4),
