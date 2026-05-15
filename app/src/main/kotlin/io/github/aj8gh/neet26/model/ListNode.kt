@@ -1,14 +1,14 @@
 package io.github.aj8gh.neet26.model
 
-data class ListNode(
-  var value: Int,
-  var next: ListNode? = null,
+data class ListNode<E : Comparable<E>>(
+  var value: E,
+  var next: ListNode<E>? = null,
 ) {
 
   override fun toString() = next?.let { "$value, $next" } ?: "$value"
 }
 
-fun linkedListOf(vararg elements: Int): ListNode {
+fun <E : Comparable<E>> linkedListOf(vararg elements: E): ListNode<E> {
   if (elements.isEmpty()) error("elements can't be empty")
   val head = ListNode(elements[0])
   var current = head
@@ -19,4 +19,4 @@ fun linkedListOf(vararg elements: Int): ListNode {
   return head
 }
 
-fun emptyLinkedList(): ListNode? = null
+fun <E : Comparable<E>> emptyLinkedList(): ListNode<E>? = null

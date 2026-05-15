@@ -20,7 +20,7 @@ slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" }
 [bundles]
 implementation = [
   "kotlin-logging-jvm",
-  "slf4j-simple"
+  "slf4j-simple",
 ]
 
 test-implementation = [
