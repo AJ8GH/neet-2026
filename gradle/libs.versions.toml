@@ -4,6 +4,7 @@ kotlin = "2.3.20"
 kover = '0.9.8'
 kotest = '6.1.11'
 kotlin-logging = '8.0.01'
+slf4j = "2.0.17"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -14,10 +15,12 @@ kover = { id = "org.jetbrains.kotlinx.kover", version.ref = 'kover' }
 kotest-assertions-core = { group = 'io.kotest', name = 'kotest-assertions-core', version.ref = 'kotest' }
 kotest-runner-junit5 = { group = 'io.kotest', name = 'kotest-runner-junit5', version.ref = 'kotest' }
 kotlin-logging-jvm = { group = 'io.github.oshai', name = 'kotlin-logging-jvm', version.ref = 'kotlin-logging' }
+slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" }
 
 [bundles]
 implementation = [
   "kotlin-logging-jvm",
+  "slf4j-simple"
 ]
 
 test-implementation = [
