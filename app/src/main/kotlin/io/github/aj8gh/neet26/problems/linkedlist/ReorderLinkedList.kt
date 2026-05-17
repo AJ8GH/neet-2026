@@ -4,22 +4,32 @@ import io.github.aj8gh.neet26.model.ListNode
 
 fun reorderList(head: ListNode<Int>?) {
   head ?: return
-  var current = head
-  var n = 0
-  while (current!!.next != null) {
-    current = current.next
-    n++
-  }
-
-  var second = head
-  for (i in 0..n / 2) {
-    val tmp = second!!.next
-    if (i == n / 2) {
-      second.next = null
-    }
+  var first = head
+  var second = split(head)
+  second = reverse(second)
+  while (first != null) {
+    val tmp = first.next
+    first.next = second
+    first = second
     second = tmp
   }
+}
 
+private fun split(head: ListNode<Int>): ListNode<Int>? {
+  var slow: ListNode<Int>? = head
+  var fast: ListNode<Int>? = head.next
+  while (fast?.next != null) {
+    fast = fast.next?.next
+    slow = slow?.next
+  }
+  val ret = slow?.next
+  slow?.next = null
+  return ret
+}
+
+@Suppress("DuplicatedCode")
+private fun reverse(second: ListNode<Int>?): ListNode<Int>? {
+  var current: ListNode<Int>?
   current = second
   var next = current?.next
   current?.next = null
@@ -29,13 +39,5 @@ fun reorderList(head: ListNode<Int>?) {
     current = next
     next = tmp
   }
-
-  var first = head
-  second = current
-  while (first != null) {
-    val tmp = first.next
-    first.next = second
-    first = first.next
-    second = tmp
-  }
+  return current
 }

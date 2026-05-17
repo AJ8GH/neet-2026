@@ -2,6 +2,7 @@ package io.github.aj8gh.neet26.problems.linkedlist
 
 import io.github.aj8gh.neet26.model.ListNode
 
+@Suppress("DuplicatedCode")
 fun reverseList(head: ListNode<Int>?): ListNode<Int>? {
   var curr = head
   var next = head?.next
@@ -22,7 +23,10 @@ fun reverseListRecursive(head: ListNode<Int>?): ListNode<Int>? {
   return reverse(head, next)
 }
 
-private tailrec fun reverse(curr: ListNode<Int>?, next: ListNode<Int>?): ListNode<Int>? {
+private tailrec fun reverse(
+  curr: ListNode<Int>?,
+  next: ListNode<Int>?,
+): ListNode<Int>? {
   if (next == null) return curr
   val tmp = next.next
   next.next = curr
