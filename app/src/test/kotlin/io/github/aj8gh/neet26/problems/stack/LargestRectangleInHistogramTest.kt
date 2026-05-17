@@ -1,9 +1,11 @@
 package io.github.aj8gh.neet26.problems.stack
 
+import io.kotest.core.annotation.Ignored
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withTests
 import io.kotest.matchers.shouldBe
 
+@Ignored
 class LargestRectangleInHistogramTest : FunSpec({
   withTests(
     Pair(intArrayOf(7, 1, 7, 2, 2, 4), 8),

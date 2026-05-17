@@ -38,8 +38,8 @@ tasks.withType<Test> {
 //     filters {
 //       excludes {
 //         classes(
-//           "$group.",
-//           "$group."
+//           "$group.extensions/**/*",
+//           "$group.model/**/*"
 //         )
 //       }
 //     }
