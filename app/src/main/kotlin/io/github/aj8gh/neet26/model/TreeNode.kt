@@ -21,9 +21,9 @@ data class TreeNode<E : Comparable<E>>(
   }
 }
 
-fun <E : Comparable<E>> binaryTreeOf(vararg values: E): TreeNode<E> {
+fun <E : Comparable<E>> binaryTreeOf(vararg values: E?): TreeNode<E> {
   val valueStack = ArrayDeque(values.toList())
-  val head = TreeNode(valueStack.removeFirst())
+  val head = TreeNode(valueStack.removeFirst()!!)
   val nodes = ArrayDeque(listOf(head))
   while (valueStack.isNotEmpty()) {
     val node = nodes.removeFirst()
