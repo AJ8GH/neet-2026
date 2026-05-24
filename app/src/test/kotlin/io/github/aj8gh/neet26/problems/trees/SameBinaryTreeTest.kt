@@ -6,10 +6,22 @@ import io.kotest.datatest.withTests
 import io.kotest.matchers.shouldBe
 
 class SameBinaryTreeTest : FunSpec({
-  withTests(
-    Triple(binaryTreeOf(1, 2, 3), binaryTreeOf(1, 2, 3), true),
-    Triple(binaryTreeOf(4, 7), binaryTreeOf(4, null, 7), false),
-  ) { (p, q, expected) ->
-    isSameTree(p, q) shouldBe expected
+  val casesFn = {
+    listOf(
+      Triple(binaryTreeOf(4, 7), binaryTreeOf(4, null, 7), false),
+      Triple(binaryTreeOf(1, 2, 3), binaryTreeOf(1, 2, 3), true),
+    )
+  }
+
+  withTests(casesFn()) { (p, q, expected) ->
+    isSameTreeRecursive(p, q) shouldBe expected
+  }
+
+  withTests(casesFn()) { (p, q, expected) ->
+    isSameTreeDfs(p, q) shouldBe expected
+  }
+
+  withTests(casesFn()) { (p, q, expected) ->
+    isSameTreeBfs(p, q) shouldBe expected
   }
 })
