@@ -7,20 +7,28 @@ import io.kotest.datatest.withTests
 import io.kotest.matchers.equals.shouldEqual
 
 class LowestCommonAncestorInBinarySearchTreeTest : FunSpec({
-  withTests(
-    Tuple4(
-      binaryTreeOf(5, 3, 8, 1, 4, 7, 9, null, 2),
-      binaryTreeOf(3, 1, 4, 2),
-      binaryTreeOf(8, 7, 9),
-      binaryTreeOf(5, 3, 8, 1, 4, 7, 9, null, 2),
-    ),
-    Tuple4(
-      binaryTreeOf(5, 3, 8, 1, 4, 7, 9, null, 2),
-      binaryTreeOf(3, 1, 4, 2),
-      binaryTreeOf(4),
-      binaryTreeOf(3, 1, 4, 2),
-    ),
-  ) { (root, p, q, expected) ->
+  val casesFn = {
+    listOf(
+      Tuple4(
+        binaryTreeOf(5, 3, 8, 1, 4, 7, 9, null, 2),
+        binaryTreeOf(3, 1, 4, null, 2),
+        binaryTreeOf(8, 7, 9),
+        binaryTreeOf(5, 3, 8, 1, 4, 7, 9, null, 2),
+      ),
+      Tuple4(
+        binaryTreeOf(5, 3, 8, 1, 4, 7, 9, null, 2),
+        binaryTreeOf(3, 1, 4, null, 2),
+        binaryTreeOf(4),
+        binaryTreeOf(3, 1, 4, null, 2),
+      ),
+    )
+  }
+
+  withTests(casesFn()) { (root, p, q, expected) ->
+    lowestCommonAncestorRecursive(root, p, q) shouldEqual expected
+  }
+
+  withTests(casesFn()) { (root, p, q, expected) ->
     lowestCommonAncestor(root, p, q) shouldEqual expected
   }
 })
