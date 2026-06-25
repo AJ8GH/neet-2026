@@ -1,26 +1,23 @@
 package io.github.aj8gh.neet26.problems.trees
 
 import io.github.aj8gh.neet26.model.TreeNode
+import kotlin.Int.Companion.MAX_VALUE
+import kotlin.Int.Companion.MIN_VALUE
 
 fun isValidBST(root: TreeNode<Int>?): Boolean {
   root ?: return true
-  return isValidBST(root.left, null, root.value)
-      && isValidBST(root.right, root.value, null)
+  return isValidBST(root.left, MIN_VALUE, root.value)
+      && isValidBST(root.right, root.value, MAX_VALUE)
 }
 
 private fun isValidBST(
   root: TreeNode<Int>?,
-  leftParent: Int?,
-  rightParent: Int?,
-): Boolean {
-  root ?: return true
-
-  if (leftParent != null && leftParent >= root.value) return false
-  if (rightParent != null && rightParent <= root.value) return false
-
-  val rightParentForLeft = rightParent?.let { minOf(root.value, it) } ?: root.value
-  val leftParentForRight = leftParent?.let { maxOf(root.value, it) } ?: root.value
-
-  return isValidBST(root.left, leftParent, rightParentForLeft)
-      && isValidBST(root.right, leftParentForRight, rightParent)
+  minBound: Int,
+  maxBound: Int,
+): Boolean = when {
+  root == null -> true
+  minBound >= root.value -> false
+  maxBound <= root.value -> false
+  else -> isValidBST(root.left, minBound, root.value)
+      && isValidBST(root.right, root.value, maxBound)
 }
