@@ -6,12 +6,21 @@ import io.kotest.datatest.withTests
 import io.kotest.matchers.shouldBe
 
 class ValidBinarySearchTreeTest : FunSpec({
-  withTests(
-    Pair(binaryTreeOf(32, 26, 47, 19, null, null, 56, null, 27), false),
-    Pair(binaryTreeOf(5, 4, 6, null, null, 3, 7), false),
-    Pair(binaryTreeOf(2, 1, 3), true),
-    Pair(binaryTreeOf(1, 2, 3), false),
-  ) { (input, expected) ->
-    isValidBST(input) shouldBe expected
+  val casesFn = {
+    listOf(
+      Pair(binaryTreeOf(32, 26, 47, 19, null, null, 56, null, 27), false),
+      Pair(binaryTreeOf(5, 4, 6, null, null, 3, 7), false),
+      Pair(binaryTreeOf(2, 1, 3), true),
+      Pair(binaryTreeOf(1, 2, 3), false),
+      Pair(binaryTreeOf(4, 2, 5, 1, 3), true),
+    )
+  }
+
+  withTests(casesFn()) { (input, expected) ->
+    isValidBstRecursive(input) shouldBe expected
+  }
+
+  withTests(casesFn()) { (input, expected) ->
+    isValidBstInOrderTraversal(input) shouldBe expected
   }
 })
