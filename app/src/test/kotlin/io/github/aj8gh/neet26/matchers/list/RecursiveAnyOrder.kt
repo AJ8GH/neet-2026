@@ -1,4 +1,4 @@
-package io.github.aj8gh.neet26.matchers
+package io.github.aj8gh.neet26.matchers.list
 
 import io.kotest.matchers.Matcher
 import io.kotest.matchers.MatcherResult

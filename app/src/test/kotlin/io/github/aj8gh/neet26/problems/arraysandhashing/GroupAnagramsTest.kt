@@ -1,6 +1,6 @@
 package io.github.aj8gh.neet26.problems.arraysandhashing
 
-import io.github.aj8gh.neet26.matchers.containExactlyInAnyOrderRecursive
+import io.github.aj8gh.neet26.matchers.list.containExactlyInAnyOrderRecursive
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withTests
 import io.kotest.matchers.should
