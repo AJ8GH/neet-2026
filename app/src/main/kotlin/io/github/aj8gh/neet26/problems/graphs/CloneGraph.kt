@@ -4,17 +4,19 @@ import io.github.aj8gh.neet26.model.Node
 
 fun cloneGraph(node: Node<Int>?): Node<Int>? {
   node ?: return null
-  val clone = Node(node.value)
-  var current = node
-  var cloneCurrent = clone
-  while (current!!.neighbors.isNotEmpty()) {
-    val n = current.neighbors.last()
-    val nClone = Node(n.value)
-    cloneCurrent.neighbors.add(nClone)
-    nClone.neighbors.add(cloneCurrent)
-    current = current.neighbors.last()
-    cloneCurrent = cloneCurrent.neighbors.last()
-    if (current.neighbors.size == 1) break
+  val vertices = mutableMapOf<Int, Node<Int>>()
+  val visited = mutableSetOf<Int>()
+  val nodes = ArrayDeque(listOf(node))
+  while (nodes.isNotEmpty()) {
+    val n = nodes.removeFirst()
+    if (n.value in visited) continue
+    visited.add(n.value)
+    val nodeClone = vertices.getOrPut(n.value) { Node(n.value) }
+    for (nb in n.neighbors) {
+      val nClone = vertices.getOrPut(nb.value) { Node(nb.value) }
+      nodeClone.neighbors.add(nClone)
+      if (nb.value !in visited) nodes.addLast(nb)
+    }
   }
-  return clone
+  return vertices[1]
 }

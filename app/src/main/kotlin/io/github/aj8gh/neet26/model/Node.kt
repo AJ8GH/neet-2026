@@ -1,19 +1,38 @@
 package io.github.aj8gh.neet26.model
 
+import java.util.IdentityHashMap
+import java.util.Objects.hash
+import kotlin.collections.ArrayDeque
+
 data class Node<T : Comparable<T>>(
   var value: T,
   var neighbors: MutableList<Node<T>> = ArrayList(),
 ) {
 
+  override fun equals(other: Any?): Boolean {
+    if (this === other) return true
+    if (other == null) return false
+    if (other !is Node<*>) return false
+    if (this.value != other.value) return false
+    return neighborValues() == other.neighborValues()
+  }
+
+  override fun hashCode() = hash(value, neighborValues())
+
+  private fun neighborValues(): List<T> = neighbors.map { it.value }
+
   override fun toString(): String {
-    var result = "[${neighbors.map { it.value }}"
-    var current = this
-    while (current.neighbors.isNotEmpty()) {
-      current = current.neighbors.last()
-      result += ", ${current.neighbors.map { it.value }}"
-      if (current.neighbors.size == 1) break
+    val visited = IdentityHashMap<Node<T>, Boolean>()
+    val actNodes = ArrayDeque(listOf(this))
+    while (actNodes.isNotEmpty()) {
+      val act = actNodes.removeFirst()
+      visited[act] = true
+      for (n in act.neighbors) if (n !in visited) actNodes.addLast(n)
     }
-    return "$result]"
+    return visited.keys
+      .sortedBy { it.value }
+      .map { n -> n.neighborValues() }
+      .joinToString(", ")
   }
 }
 

@@ -10,6 +10,7 @@ fun <T : Comparable<T>> haveNoSharedRefs(expected: Node<T>?) =
   Matcher<Node<T>?> { actual ->
     var success = true
     val visited = IdentityHashMap<Node<T>, Boolean>()
+    val visitedExp = IdentityHashMap<Node<T>, Boolean>()
 
     val actNodes = ArrayDeque(listOf(actual))
     while (actNodes.isNotEmpty()) {
@@ -27,11 +28,14 @@ fun <T : Comparable<T>> haveNoSharedRefs(expected: Node<T>?) =
         success = false
         break
       }
-      for (n in exp.neighbors) if (n in visited) {
-        success = false
-        break
-      } else {
-        expNodes.addLast(n)
+      visitedExp[exp] = true
+      for (n in exp.neighbors) {
+        if (n in visited) {
+          success = false
+          break
+        } else {
+          if (n !in visitedExp) expNodes.addLast(n)
+        }
       }
     }
 
