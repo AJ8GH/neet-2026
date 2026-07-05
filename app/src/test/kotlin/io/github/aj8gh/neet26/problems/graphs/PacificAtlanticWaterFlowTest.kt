@@ -7,8 +7,7 @@ import io.kotest.matchers.equals.shouldBeEqual
 class PacificAtlanticWaterFlowTest : FunSpec({
   withTests(
     Pair(
-      arrayOf(
-        intArrayOf(4, 2, 7, 3, 4),
+      arrayOf(intArrayOf(4, 2, 7, 3, 4),
         intArrayOf(7, 4, 6, 4, 7),
         intArrayOf(6, 3, 5, 3, 6)
       ),
