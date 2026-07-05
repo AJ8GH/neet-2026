@@ -22,15 +22,11 @@ private fun canFlow(
   found: Set<Pair<Int, Int>>,
   ocean: Char,
 ): Boolean {
-  if (canFlow(point, ocean, heights)) return true
-  val paths = ArrayDeque<Pair<Int, Int>>()
-  val visited = mutableSetOf<Pair<Pair<Int, Int>, Pair<Int, Int>>>()
-  queuePaths(point, paths, visited, heights)
+  val paths = ArrayDeque(listOf(point))
+  val visited = mutableSetOf<Pair<Int, Int>>()
   while (paths.isNotEmpty()) {
     val p = paths.removeFirst()
-    if (p in found) return true
-
-    if (canFlow(p, ocean, heights)) return true
+    if (p in found || canFlow(p, ocean, heights)) return true
     queuePaths(p, paths, visited, heights)
   }
   return false
@@ -39,7 +35,7 @@ private fun canFlow(
 private fun queuePaths(
   point: Pair<Int, Int>,
   paths: ArrayDeque<Pair<Int, Int>>,
-  visited: MutableSet<Pair<Pair<Int, Int>, Pair<Int, Int>>>,
+  visited: MutableSet<Pair<Int, Int>>,
   heights: Array<IntArray>,
 ) {
   queue(point, Pair(point.first - 1, point.second), heights, visited, paths)
@@ -52,9 +48,10 @@ private fun queue(
   point: Pair<Int, Int>,
   newPoint: Pair<Int, Int>,
   heights: Array<IntArray>,
-  visited: MutableSet<Pair<Pair<Int, Int>, Pair<Int, Int>>>,
+  visited: MutableSet<Pair<Int, Int>>,
   paths: ArrayDeque<Pair<Int, Int>>,
 ) {
+  if (newPoint in visited) return
   val (i, j) = point
   val (i2, j2) = newPoint
   if (i2 < 0 || j2 < 0 || i2 > heights.lastIndex || j2 > heights[i2].lastIndex) {
@@ -62,15 +59,12 @@ private fun queue(
   }
 
   if (heights[i2][j2] <= heights[i][j]) {
-    val pair = Pair(point, newPoint)
-    if (pair !in visited) {
-      visited.add(pair)
-      paths.add(newPoint)
-    }
+    visited.add(newPoint)
+    paths.add(newPoint)
   }
 }
 
-fun canFlow(p: Pair<Int, Int>, ocean: Char, heights: Array<IntArray>): Boolean {
+private fun canFlow(p: Pair<Int, Int>, ocean: Char, heights: Array<IntArray>): Boolean {
   val (i, j) = p
   return (ocean == 'P' && (i == 0 || j == 0)) ||
       (ocean == 'A' && (i == heights.lastIndex || j == heights[i].lastIndex))
