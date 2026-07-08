@@ -2,26 +2,10 @@ package io.github.aj8gh.neet26.problems.graphs
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withTests
-import io.kotest.matchers.equals.shouldBeEqual
+import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
 
 class PacificAtlanticWaterFlowTest : FunSpec({
   withTests(
-    Pair(
-      arrayOf(
-        intArrayOf(1, 2, 3),
-        intArrayOf(8, 9, 4),
-        intArrayOf(7, 6, 5),
-      ),
-      listOf(
-        listOf(0, 2),
-        listOf(1, 0),
-        listOf(1, 1),
-        listOf(1, 2),
-        listOf(2, 0),
-        listOf(2, 1),
-        listOf(2, 2),
-      )
-    ),
     Pair(
       arrayOf(
         intArrayOf(4, 2, 7, 3, 4),
@@ -39,6 +23,24 @@ class PacificAtlanticWaterFlowTest : FunSpec({
         listOf(2, 0),
       ),
     ),
+
+    Pair(
+      arrayOf(
+        intArrayOf(1, 2, 3),
+        intArrayOf(8, 9, 4),
+        intArrayOf(7, 6, 5),
+      ),
+      listOf(
+        listOf(0, 2),
+        listOf(1, 0),
+        listOf(1, 1),
+        listOf(1, 2),
+        listOf(2, 0),
+        listOf(2, 1),
+        listOf(2, 2),
+      )
+    ),
+
     Pair(
       arrayOf(
         intArrayOf(1),
@@ -50,6 +52,6 @@ class PacificAtlanticWaterFlowTest : FunSpec({
       ),
     ),
   ) { (input, expected) ->
-    pacificAtlantic(input) shouldBeEqual expected
+    pacificAtlantic(input) shouldContainExactlyInAnyOrder expected
   }
 })

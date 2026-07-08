@@ -1,71 +1,58 @@
 package io.github.aj8gh.neet26.problems.graphs
 
 fun pacificAtlantic(heights: Array<IntArray>): List<List<Int>> {
-  val results = mutableListOf<List<Int>>()
-  val found = mutableSetOf<Pair<Int, Int>>()
+  val pacificNodes = ArrayDeque(heights.first().indices.map { listOf(0, it) })
+  (1..heights.lastIndex).forEach { pacificNodes.addLast(listOf(it, 0)) }
 
-  for ((i, row) in heights.withIndex()) {
-    for (j in row.indices) {
-      val point = Pair(i, j)
-      if (canFlow(point, heights, found, 'P') && canFlow(point, heights, found, 'A')) {
-        found.add(point)
-        results.add(listOf(point.first, point.second))
-      }
-    }
-  }
-  return results
+  val atlanticNodes = ArrayDeque((0..<heights.last().lastIndex).map { listOf(heights.lastIndex, it) })
+  heights.indices.forEach { atlanticNodes.addLast(listOf(it, heights[it].lastIndex)) }
+
+  val pacificCells = canFlow(heights, pacificNodes)
+  val atlanticCells = canFlow(heights, atlanticNodes)
+  return pacificCells.intersect(atlanticCells).toList()
 }
 
 private fun canFlow(
-  point: Pair<Int, Int>,
   heights: Array<IntArray>,
-  found: Set<Pair<Int, Int>>,
-  ocean: Char,
-): Boolean {
-  val paths = ArrayDeque(listOf(point))
-  val visited = mutableSetOf<Pair<Int, Int>>()
-  while (paths.isNotEmpty()) {
-    val p = paths.removeFirst()
-    if (p in found || canFlow(p, ocean, heights)) return true
-    queuePaths(p, paths, visited, heights)
+  nodes: ArrayDeque<List<Int>>,
+): Set<List<Int>> {
+  val visited = mutableSetOf<List<Int>>()
+  while (nodes.isNotEmpty()) {
+    val n = nodes.removeFirst()
+    visited.add(n)
+    queueNodes(n, nodes, visited, heights)
   }
-  return false
+  return visited
 }
 
-private fun queuePaths(
-  point: Pair<Int, Int>,
-  paths: ArrayDeque<Pair<Int, Int>>,
-  visited: MutableSet<Pair<Int, Int>>,
+private fun queueNodes(
+  node: List<Int>,
+  nodes: ArrayDeque<List<Int>>,
+  visited: MutableSet<List<Int>>,
   heights: Array<IntArray>,
 ) {
-  queue(point, Pair(point.first - 1, point.second), heights, visited, paths)
-  queue(point, Pair(point.first + 1, point.second), heights, visited, paths)
-  queue(point, Pair(point.first, point.second - 1), heights, visited, paths)
-  queue(point, Pair(point.first, point.second + 1), heights, visited, paths)
+  queue(node, listOf(node.first() - 1, node.last()), heights, visited, nodes)
+  queue(node, listOf(node.first() + 1, node.last()), heights, visited, nodes)
+  queue(node, listOf(node.first(), node.last() - 1), heights, visited, nodes)
+  queue(node, listOf(node.first(), node.last() + 1), heights, visited, nodes)
 }
 
 private fun queue(
-  point: Pair<Int, Int>,
-  newPoint: Pair<Int, Int>,
+  n1: List<Int>,
+  n2: List<Int>,
   heights: Array<IntArray>,
-  visited: MutableSet<Pair<Int, Int>>,
-  paths: ArrayDeque<Pair<Int, Int>>,
+  visited: MutableSet<List<Int>>,
+  nodes: ArrayDeque<List<Int>>,
 ) {
-  if (newPoint in visited) return
-  val (i, j) = point
-  val (i2, j2) = newPoint
+  if (n2 in visited) return
+  val (i, j) = n1
+  val (i2, j2) = n2
   if (i2 < 0 || j2 < 0 || i2 > heights.lastIndex || j2 > heights[i2].lastIndex) {
     return
   }
 
-  if (heights[i2][j2] <= heights[i][j]) {
-    visited.add(newPoint)
-    paths.add(newPoint)
+  if (heights[i2][j2] >= heights[i][j]) {
+    visited.add(n2)
+    nodes.add(n2)
   }
-}
-
-private fun canFlow(p: Pair<Int, Int>, ocean: Char, heights: Array<IntArray>): Boolean {
-  val (i, j) = p
-  return (ocean == 'P' && (i == 0 || j == 0)) ||
-      (ocean == 'A' && (i == heights.lastIndex || j == heights[i].lastIndex))
 }
