@@ -6,6 +6,7 @@ import io.kotest.matchers.shouldBe
 
 class CourseScheduleTest : FunSpec({
   withTests(
+    Triple(4, arrayOf(intArrayOf(0, 1), intArrayOf(1, 2), intArrayOf(0, 3)), true),
     Triple(
       4,
       arrayOf(
