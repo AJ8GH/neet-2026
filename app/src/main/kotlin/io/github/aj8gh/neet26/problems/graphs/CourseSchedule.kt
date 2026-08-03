@@ -23,3 +23,35 @@ fun canFinish(numCourses: Int, prerequisites: Array<IntArray>): Boolean {
 
   return prereqCount.all { it == 0 }
 }
+
+fun canFinishDfs(numCourses: Int, prerequisites: Array<IntArray>): Boolean {
+  val courseStates = IntArray(numCourses)
+  val prereqsByCourse = mutableMapOf<Int, MutableList<Int>>()
+
+  for (p in prerequisites) {
+    prereqsByCourse.getOrPut(p.first()) { mutableListOf() }.add(p.last())
+  }
+
+  for (c in courseStates.indices) {
+    if (!dfs(c, courseStates, prereqsByCourse)) return false
+  }
+
+  return true
+}
+
+private fun dfs(
+  c: Int,
+  courseStates: IntArray,
+  prereqsByCourse: MutableMap<Int, MutableList<Int>>,
+): Boolean {
+  if (courseStates[c] == 2) return true
+  if (courseStates[c] == 1) return false
+
+  courseStates[c] = 1
+  for (p in prereqsByCourse[c] ?: emptyList()) {
+    if (!dfs(p, courseStates, prereqsByCourse)) return false
+  }
+
+  courseStates[c] = 2
+  return true
+}

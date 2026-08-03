@@ -4,9 +4,8 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withTests
 import io.kotest.matchers.shouldBe
 
-class CourseScheduleTest : FunSpec({
-  withTests(
-    Triple(4, arrayOf(intArrayOf(0, 1), intArrayOf(1, 2), intArrayOf(0, 3)), true),
+val casesFn = {
+  listOf(
     Triple(
       4,
       arrayOf(
@@ -18,6 +17,7 @@ class CourseScheduleTest : FunSpec({
       ),
       false
     ),
+    Triple(4, arrayOf(intArrayOf(0, 1), intArrayOf(1, 2), intArrayOf(0, 3)), true),
     Triple(3, arrayOf(intArrayOf(1, 0), intArrayOf(2, 1)), true),
     Triple(2, arrayOf(intArrayOf(0, 1)), true),
     Triple(
@@ -52,8 +52,14 @@ class CourseScheduleTest : FunSpec({
       ),
       false
     ),
-    Triple(2, arrayOf(intArrayOf(0, 1), intArrayOf(1, 0)), false),
-  ) { (numCourses, prerequisites, expected) ->
+  )
+}
+
+class CourseScheduleTest : FunSpec({
+  withTests(casesFn()) { (numCourses, prerequisites, expected) ->
+    canFinishDfs(numCourses, prerequisites) shouldBe expected
+  }
+  withTests(casesFn()) { (numCourses, prerequisites, expected) ->
     canFinish(numCourses, prerequisites) shouldBe expected
   }
 })
