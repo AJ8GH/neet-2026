@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.withTests
 import io.kotest.matchers.shouldBe
 
-val casesFn = {
+private val casesFn = {
   listOf(
     Triple(
       4,

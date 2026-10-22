@@ -36,9 +36,12 @@ data class Node<T : Comparable<T>>(
   }
 }
 
-fun nodeOf(vararg nodes: List<Int>): Node<Int> {
-  val nodesByVal = nodes
-    .mapIndexed { i, _ -> Node(i + 1) }
+fun nodeOf(vararg nodes: IntArray) = buildNodes(nodes.map { it.asIterable() })
+fun nodeOf(vararg nodes: List<Int>) = buildNodes(nodes.map { it.asIterable() })
+
+private fun buildNodes(nodes: List<Iterable<Int>>): Node<Int> {
+  intArrayOf(2).asIterable()
+  val nodesByVal = List(nodes.size) { i -> Node(i + 1) }
     .associateBy { it.value }
   for ((i, n) in nodesByVal) {
     val neighbors = nodes[i - 1]
