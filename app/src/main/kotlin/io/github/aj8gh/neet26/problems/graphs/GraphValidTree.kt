@@ -31,7 +31,7 @@ fun validTree(n: Int, edges: Array<IntArray>): Boolean {
 fun validTreeUnionFind(n: Int, edges: Array<IntArray>): Boolean {
   if (edges.size != n - 1) return false
 
-  val parents = (0 until n).toList().toIntArray()
+  val parents = IntArray(n) { it }
   for (e in edges) {
     val parent1 = find(e.first(), parents)
     val parent2 = find(e.last(), parents)
@@ -40,6 +40,23 @@ fun validTreeUnionFind(n: Int, edges: Array<IntArray>): Boolean {
   }
 
   return true
+}
+
+fun validTreeConnectedComponents(n: Int, edges: Array<IntArray>): Boolean {
+  if (edges.size != n - 1) return false
+
+  val parents = IntArray(n) { it }
+  var groups = n
+
+  for (e in edges) {
+    val p1 = find(e.first(), parents)
+    val p2 = find(e.last(), parents)
+    if (p1 != p2) {
+      groups--
+      parents[p1] = p2
+    }
+  }
+  return groups == 1
 }
 
 private fun find(i: Int, parents: IntArray): Int {
@@ -51,9 +68,9 @@ private fun find(i: Int, parents: IntArray): Int {
 
   current = i
   while (current != root) {
-    val parent = parents[current]
+    val next = parents[current]
     parents[current] = root
-    current = parent
+    current = next
   }
 
   return root

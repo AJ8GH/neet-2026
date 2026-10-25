@@ -110,6 +110,10 @@ private val casesFn = {
 
 class ValidTreeTest : FunSpec({
   withTests(casesFn()) { (n, edges, expected) ->
+    validTreeConnectedComponents(n, edges) shouldBe expected
+  }
+
+  withTests(casesFn()) { (n, edges, expected) ->
     validTreeUnionFind(n, edges) shouldBe expected
   }
 
