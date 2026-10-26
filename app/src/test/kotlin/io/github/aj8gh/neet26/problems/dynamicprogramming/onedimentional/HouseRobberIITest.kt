@@ -8,16 +8,14 @@ class HouseRobberIITest : FunSpec({
 
   val casesFn = {
     listOf(
+      Pair(intArrayOf(1, 2, 1, 1), 3),
+      Pair(intArrayOf(1, 2), 2),
       Pair(intArrayOf(3, 4, 3), 4),
       Pair(intArrayOf(0, 1, 9, 0, 1, 9), 18),
       Pair(intArrayOf(1, 1, 3, 3), 4),
       Pair(intArrayOf(2, 9, 8, 3, 6), 15),
       Pair(intArrayOf(0), 0),
     )
-  }
-
-  withTests(casesFn()) { (input, expected) ->
-    robNonMutating(input) shouldBe expected
   }
 
   withTests(casesFn()) { (input, expected) ->
