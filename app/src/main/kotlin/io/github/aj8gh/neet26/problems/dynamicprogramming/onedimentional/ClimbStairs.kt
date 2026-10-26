@@ -14,3 +14,14 @@ private fun climbStairs(n: Int, cache: IntArray): Int =
       cache[n]
     }
   }
+
+fun climbStairsUpward(n: Int): Int {
+  var first = 0
+  var result = 1
+  repeat(n) {
+    val tmp = result
+    result += first
+    first = tmp
+  }
+  return result
+}

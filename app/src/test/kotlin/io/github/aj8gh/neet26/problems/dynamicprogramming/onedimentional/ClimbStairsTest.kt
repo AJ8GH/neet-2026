@@ -10,8 +10,17 @@ class ClimbStairsTest : FunSpec({
       Pair(1, 1),
       Pair(2, 2),
       Pair(3, 3),
+      Pair(4, 5),
+      Pair(5, 8),
+      Pair(6, 13),
+      Pair(7, 21),
+      Pair(8, 34),
       Pair(45, 1836311903),
     )
+  }
+
+  withTests(casesFn()) { (input, expected) ->
+    climbStairsUpward(input) shouldBe expected
   }
 
   withTests(casesFn()) { (input, expected) ->
