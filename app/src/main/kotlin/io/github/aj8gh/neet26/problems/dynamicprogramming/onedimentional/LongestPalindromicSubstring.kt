@@ -11,7 +11,7 @@ fun longestPalindrome(s: String): String {
   return s.substring(best.first, best.second + 1)
 }
 
-fun expand(s: String, idxI: Int, idxJ: Int): Pair<Int, Int> {
+private fun expand(s: String, idxI: Int, idxJ: Int): Pair<Int, Int> {
   var i = idxI
   var j = idxJ
   while (i >= 0 && j <= s.lastIndex && s[i] == s[j]) {
