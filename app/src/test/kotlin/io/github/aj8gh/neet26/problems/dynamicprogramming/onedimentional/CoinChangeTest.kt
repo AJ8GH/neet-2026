@@ -8,6 +8,7 @@ class CoinChangeTest : FunSpec({
 
   val casesFn = {
     listOf(
+      Triple(intArrayOf(1, 2, 3, 5), 0, 0),
       Triple(intArrayOf(1, 2, 3, 5), 2, 1),
       Triple(intArrayOf(2), 3, -1),
       Triple(intArrayOf(1), 1, 1),
