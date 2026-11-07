@@ -33,4 +33,8 @@ class CoinChangeTest : FunSpec({
   withTests(casesFn()) { (coins, amount, expected) ->
     coinChange(coins, amount) shouldBe expected
   }
+
+  withTests(casesFn()) { (coins, amount, expected) ->
+    coinChange2(coins, amount) shouldBe expected
+  }
 })

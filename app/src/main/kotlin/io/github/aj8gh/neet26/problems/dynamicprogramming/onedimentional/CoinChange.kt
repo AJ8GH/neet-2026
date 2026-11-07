@@ -15,3 +15,15 @@ fun coinChange(coins: IntArray, amount: Int): Int {
   }
   return minCoinsPerAmount.last()
 }
+
+fun coinChange2(coins: IntArray, amount: Int): Int {
+  val unreachable = amount + 1
+  val table = IntArray(amount + 1) { unreachable }
+  table[0] = 0
+  for (i in 1..amount) {
+    for (coin in coins) {
+      if (coin <= i) table[i] = minOf(table[i], table[i - coin] + 1)
+    }
+  }
+  return if (table.last() >= unreachable) -1 else table.last()
+}
