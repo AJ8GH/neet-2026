@@ -5,7 +5,6 @@ import io.kotest.datatest.withTests
 import io.kotest.matchers.string.shouldMatch
 
 class LongestPalindromicSubstringTest : FunSpec({
-
   val casesFn = {
     listOf(
       Pair("abb", "bb"),

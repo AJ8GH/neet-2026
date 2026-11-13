@@ -5,7 +5,6 @@ import io.kotest.datatest.withTests
 import io.kotest.matchers.shouldBe
 
 class HouseRobberIITest : FunSpec({
-
   val casesFn = {
     listOf(
       Pair(intArrayOf(1, 2, 1, 1), 3),

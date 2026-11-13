@@ -5,7 +5,6 @@ import io.kotest.datatest.withTests
 import io.kotest.matchers.shouldBe
 
 class PalindromicSubstringsTest : FunSpec({
-
   val casesFn = {
     listOf(
       Pair("abc", 3),

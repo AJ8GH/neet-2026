@@ -20,6 +20,10 @@ class ClimbStairsTest : FunSpec({
   }
 
   withTests(casesFn()) { (input, expected) ->
+    climbStairs2(input) shouldBe expected
+  }
+
+  withTests(casesFn()) { (input, expected) ->
     climbStairsUpward(input) shouldBe expected
   }
 

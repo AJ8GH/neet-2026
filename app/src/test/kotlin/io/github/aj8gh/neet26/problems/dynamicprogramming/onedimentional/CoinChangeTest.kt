@@ -5,7 +5,6 @@ import io.kotest.datatest.withTests
 import io.kotest.matchers.shouldBe
 
 class CoinChangeTest : FunSpec({
-
   val casesFn = {
     listOf(
       Triple(intArrayOf(1, 2, 3, 5), 0, 0),
