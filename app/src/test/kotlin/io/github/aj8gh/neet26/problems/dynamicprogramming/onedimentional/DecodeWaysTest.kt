@@ -7,10 +7,10 @@ import io.kotest.matchers.shouldBe
 class DecodeWaysTest : FunSpec({
   val casesFn = {
     listOf(
+      Pair("2101", 1),
+      Pair("12101", 2),
       Pair("123123", 9),
       Pair("1234213", 9),
-      Pair("12101", 2),
-      Pair("2101", 1),
       Pair("12", 2),
       Pair("01", 0),
       Pair("123", 3),
